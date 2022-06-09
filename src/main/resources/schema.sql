@@ -1,3 +1,6 @@
+drop table if exists scenario;
+drop table if exists campaign;
+
 CREATE TABLE campaign (
   id uuid default random_uuid() primary key,
   name VARCHAR(64) NOT NULL,

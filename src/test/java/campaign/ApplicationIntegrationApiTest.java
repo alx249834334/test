@@ -3,18 +3,21 @@ package campaign;
 import campaign.model.Campaign;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-//У данного теста не подтягивается application.properties из папки test
+//У данного теста не подтягивается application-test.properties из папки test
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@EnableConfigurationProperties
+@TestPropertySource(locations = "/application-test.properties")
+@Sql({"/schema.sql"})
 class ApplicationIntegrationApiTest {
     @LocalServerPort
     private int port;
@@ -22,15 +25,14 @@ class ApplicationIntegrationApiTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
-//    @Test
-//    @Sql({"/schema.sql"})
-//    public void testGet()
-//    {
-//        assertTrue(
-//                this.restTemplate
-//                        .getForObject("http://localhost:" + port + "/campaigns/ec3b15b5-d075-4430-b447-c3d2661c64a0", Campaign.class) == null);
-//
-//    }
+    @Test
+    public void testGet()
+    {
+        var result = this.restTemplate
+                .getForObject("http://localhost:" + port + "/api/campaigns/ec3b15b5-d075-4430-b447-c3d2661c64a0", Campaign.class);
+        assertNull(result);
+
+    }
 
 //    @Test
 //    public void testPost() {
