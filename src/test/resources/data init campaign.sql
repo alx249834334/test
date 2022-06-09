@@ -1,0 +1,1 @@
+insert into campaign (id, name, status) VALUES('ec3b15b5-d075-4430-b447-c3d2661c64a0','test','new');
