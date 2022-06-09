@@ -84,8 +84,8 @@ public class CampaignController {
 
     //TODO:данный метод не реализован, здесь только черновик возможной реализации
     @PostMapping("/campaign/upload_scenarios")
-    public String handleFileUpload(@RequestParam("file") MultipartFile file) throws Exception {
-        campaignService.uploadScenarios(file);
-        return "file";
+    public Campaign handleFileUpload(@RequestPart("file") MultipartFile file) throws Exception {
+        var updatedCampaign = campaignService.uploadScenariosAndGetCampaign(file);
+        return updatedCampaign;
     }
 }

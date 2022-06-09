@@ -14,6 +14,6 @@ public interface ICampaignService {
 
     void updateCampaign(UUID id, CampaignPatchDto patchCampaign);
 
-    void uploadScenarios(MultipartFile file) throws Exception;
+    Campaign uploadScenariosAndGetCampaign(MultipartFile file) throws Exception;
 }
 

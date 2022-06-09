@@ -23,8 +23,8 @@ public class ConverterCsv {
             InputStreamReader streamReader = new InputStreamReader(file.getInputStream(), StandardCharsets.UTF_8);
             CsvToBean<T> csvToBean = new CsvToBeanBuilder<T>(streamReader)
                     .withType(target)
-                    .withSeparator(';')
-                    .withIgnoreLeadingWhiteSpace(true)
+                    //.withSeparator(';')
+                    //.withIgnoreLeadingWhiteSpace(true)
                     .build();
             return csvToBean.parse();
         } catch (IOException e) {

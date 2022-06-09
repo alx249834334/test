@@ -2,18 +2,18 @@ package campaign.service;
 
 import campaign.converter.CampaignMapper;
 import campaign.converter.ConverterCsv;
+import campaign.converter.ScenarionMapper;
 import campaign.model.Campaign;
 import campaign.model.Scenario;
 import campaign.repository.ICampaignRepository;
 import campaign.validation.CampaignPatchDto;
 import campaign.validation.CampaignDto;
+import campaign.validation.ScenarioDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.mapstruct.factory.Mappers;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -23,8 +23,11 @@ public class CampaignService implements ICampaignService {
 
     private final ICampaignRepository companyRepository;
 
-    private CampaignMapper mapper
+    private CampaignMapper campaignMapper
             = Mappers.getMapper(CampaignMapper.class);
+
+    private ScenarionMapper scenarionMapper
+            = Mappers.getMapper(ScenarionMapper.class);
 
     public CampaignService(ICampaignRepository companyRepository) {
         this.companyRepository = companyRepository;
@@ -38,7 +41,7 @@ public class CampaignService implements ICampaignService {
 
     @Override
     public UUID createCampaign(CampaignDto newCompany) {
-        var campaign = mapper.CampaignDtoToCampaign(newCompany);
+        var campaign = campaignMapper.CampaignDtoToCampaign(newCompany);
         companyRepository.save(campaign);
         return campaign.getId();
     }
@@ -54,10 +57,18 @@ public class CampaignService implements ICampaignService {
     }
 
     @Override
-    public void uploadScenarios(MultipartFile file) throws Exception {
+    public Campaign uploadScenariosAndGetCampaign(MultipartFile file) throws Exception {
+        var ListScenarioDtoToUpload = ConverterCsv.convertFileToTargetObject(file, ScenarioDto.class);
+        var ListScenarioToUpload = ListScenarioDtoToUpload.stream().
+                map( el -> scenarionMapper.ScenarioDtoToScenario(el) ).collect(Collectors.toList());
 
-        var ListScenarioToUpload = ConverterCsv.convertFileToTargetObject(file, Scenario.class);
+        companyRepository.save(ListScenarioToUpload);
+
         var groupByIdListToUpdate = ListScenarioToUpload.stream().collect
-                (Collectors.groupingBy(Scenario::getId));
+                (Collectors.groupingBy(Scenario::getCampaign_id));
+        var keyUUID = groupByIdListToUpdate.keySet().stream().findFirst().get();
+        var companyByKeyUUID = companyRepository.getCompany(keyUUID);
+        companyByKeyUUID.setScenarioList(ListScenarioToUpload);
+        return companyByKeyUUID;
     }
 }

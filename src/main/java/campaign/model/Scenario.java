@@ -15,19 +15,15 @@ public class Scenario {
     //@NotEmpty
     private String name;
 
-    //@Pattern(regexp = "new|active|deactivated")
-    private String status = "new";
-
     private LocalDate start_date;
 
     private LocalDate end_date;
 
     private UUID campaign_id;
 
-    public Scenario(UUID id, String name, String status, LocalDate start_date, LocalDate end_date, UUID campaign_id) {
+    public Scenario(UUID id, String name, LocalDate start_date, LocalDate end_date, UUID campaign_id) {
         this.id = id;
         this.name = name;
-        this.status = status;
         this.start_date = start_date;
         this.end_date = end_date;
         this.campaign_id = campaign_id;
@@ -73,12 +69,5 @@ public class Scenario {
         this.name = name;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
 }
 
