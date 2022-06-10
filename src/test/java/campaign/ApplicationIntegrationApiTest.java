@@ -82,7 +82,7 @@ class ApplicationIntegrationApiTest {
 
         HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
 
-        ResponseEntity<Campaign> result = restTemplate.postForEntity("/api/campaign/////upload_scenarios",
+        ResponseEntity<Campaign> result = restTemplate.postForEntity("/api/campaign/upload_scenarios",
                 requestEntity, Campaign.class);
 
         assertNotNull(result);
