@@ -18,6 +18,9 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+/**
+ * The type Campaign service.
+ */
 @Service
 public class CampaignService implements ICampaignService {
 
@@ -29,6 +32,11 @@ public class CampaignService implements ICampaignService {
     private ScenarionMapper scenarionMapper
             = Mappers.getMapper(ScenarionMapper.class);
 
+    /**
+     * Instantiates a new Campaign service.
+     *
+     * @param companyRepository the company repository
+     */
     public CampaignService(ICampaignRepository companyRepository) {
         this.companyRepository = companyRepository;
     }
@@ -39,6 +47,11 @@ public class CampaignService implements ICampaignService {
         return result;
     }
 
+    /**
+     *
+     * @param newCompany
+     * @return
+     */
     @Override
     public UUID createCampaign(CampaignDto newCompany) {
         var campaign = campaignMapper.CampaignDtoToCampaign(newCompany);
@@ -46,6 +59,11 @@ public class CampaignService implements ICampaignService {
         return campaign.getId();
     }
 
+    /**
+     *
+     * @param id            the id
+     * @param patchCampaign the patch campaign
+     */
     @Override
     public void updateCampaign(UUID id, CampaignPatchDto patchCampaign) {
         ObjectMapper oMapper = new ObjectMapper();
@@ -56,6 +74,12 @@ public class CampaignService implements ICampaignService {
         companyRepository.updateWithParameters(map, id);
     }
 
+    /**
+     *
+     * @param file the file
+     * @return
+     * @throws Exception
+     */
     @Override
     public Campaign uploadScenariosAndGetCampaign(MultipartFile file) throws Exception {
         var ListScenarioDtoToUpload = ConverterCsv.convertFileToTargetObject(file, ScenarioDto.class);

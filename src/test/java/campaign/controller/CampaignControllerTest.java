@@ -21,6 +21,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * The type Campaign controller test.
+ */
 @WebMvcTest(CampaignController.class)
 class CampaignControllerTest {
 
@@ -30,12 +33,22 @@ class CampaignControllerTest {
     @MockBean
     private ICampaignService campaignService;
 
+    /**
+     * Test get.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testGet() throws Exception {
         this.mockMvc.perform(get("/api/campaigns/ec3b15b5-d075-4430-b447-c3d2661c64a0")).andDo(print()).andExpect(status().isOk());
                 //.andExpect(content().string(containsString("Hello, World")));
     }
 
+    /**
+     * Test post.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testPost() throws Exception {
         RequestBuilder request = MockMvcRequestBuilders
@@ -55,6 +68,11 @@ class CampaignControllerTest {
         mockMvc.perform(requestExtended).andExpect(status().isOk());
     }
 
+    /**
+     * Test patch.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testPatch() throws Exception {
         RequestBuilder request = MockMvcRequestBuilders
@@ -92,6 +110,11 @@ class CampaignControllerTest {
         mockMvc.perform(requestExtended).andExpect(status().isOk());
     }
 
+    /**
+     * Test upload.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testUpload() throws Exception {
         MockMultipartFile file

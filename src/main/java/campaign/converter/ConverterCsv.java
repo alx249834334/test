@@ -11,10 +11,22 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
+/**
+ * The type Converter csv.
+ */
 public class ConverterCsv {
 
     private final static Logger log = LoggerFactory.getLogger(ConverterCsv.class);
 
+    /**
+     * Convert file to target object list.
+     *
+     * @param <T>    the type parameter
+     * @param file   the file
+     * @param target the target
+     * @return the list
+     * @throws Exception the exception
+     */
     public static <T> List<T> convertFileToTargetObject(MultipartFile file, Class<T> target) throws Exception {
         if (file == null) {
             throw new Exception("No file uploaded!");

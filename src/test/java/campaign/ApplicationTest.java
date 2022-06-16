@@ -11,12 +11,21 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * The type Application test.
+ */
 @SpringBootTest
 class ApplicationTest {
 
+    /**
+     * The Controller.
+     */
     @Autowired
     CampaignController controller;
 
+    /**
+     * Context loads.
+     */
     @Test
     public void contextLoads() {
         assertThat(controller).isNotNull();

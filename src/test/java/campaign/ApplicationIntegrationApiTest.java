@@ -26,6 +26,9 @@ import org.springframework.http.ResponseEntity;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type Application integration api test.
+ */
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @EnableConfigurationProperties
@@ -41,6 +44,9 @@ class ApplicationIntegrationApiTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
+    /**
+     * Test get.
+     */
     @Test
     public void testGet()
     {
@@ -71,6 +77,11 @@ class ApplicationIntegrationApiTest {
 //        */
 //    }
 
+    /**
+     * Test upload.
+     *
+     * @throws IOException the io exception
+     */
     @Test
     public void testUpload() throws IOException {
         LOG.debug("testUpload");

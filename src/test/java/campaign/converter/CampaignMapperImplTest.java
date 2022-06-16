@@ -7,11 +7,17 @@ import org.mapstruct.factory.Mappers;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type Campaign mapper impl test.
+ */
 class CampaignMapperImplTest {
 
     private CampaignMapper mapper
             = Mappers.getMapper(CampaignMapper.class);
 
+    /**
+     * Campaign to dto.
+     */
     @Test
     void campaignToDto() {
         var campaign = new Campaign("test_name");
@@ -21,6 +27,9 @@ class CampaignMapperImplTest {
         assertEquals(campaign.getName(), campaignToDto.getName());
     }
 
+    /**
+     * Campaign dto to campaign.
+     */
     @Test
     void campaignDtoToCampaign() {
         var campaignToDto = new CampaignDto("test_name");

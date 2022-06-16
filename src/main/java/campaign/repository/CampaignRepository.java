@@ -9,12 +9,27 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
+/**
+ * The type Campaign repository.
+ */
 @Component
 public class CampaignRepository implements ICampaignRepository {
 
+    /**
+     * The constant SQL_START_UPDATE.
+     */
     public static final String SQL_START_UPDATE = "UPDATE campaign SET ";
+    /**
+     * The constant SQL_END_UPDATE.
+     */
     public static final String SQL_END_UPDATE = " WHERE id = ?";
+    /**
+     * The constant INSERT_INTO_CAMPAIGN_ID_NAME_STATUS_VALUES.
+     */
     public static final String INSERT_INTO_CAMPAIGN_ID_NAME_STATUS_VALUES = "INSERT INTO campaign(id, name, status) VALUES(?,?,?)";
+    /**
+     * The constant INSERT_INTO_SCENARIO.
+     */
     public static final String INSERT_INTO_SCENARIO =
             "INSERT INTO scenario(id, name, start_date,end_date,campaign_id) VALUES(?,?,?,?,?)";
     private static final String SQL_SELECT_CAMPAIGN = "SELECT id,name,status FROM campaign WHERE id = ?";
@@ -27,6 +42,11 @@ public class CampaignRepository implements ICampaignRepository {
 
     private final JdbcTemplate jdbcTemplate;
 
+    /**
+     * Instantiates a new Campaign repository.
+     *
+     * @param jdbcTemplate the jdbc template
+     */
     public CampaignRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
@@ -37,6 +57,13 @@ public class CampaignRepository implements ICampaignRepository {
         jdbcTemplate.update(sql, parameters.toArray());
     }
 
+    /**
+     *
+     * @param mapToUpdate
+     * @param id
+     * @param map
+     * @return
+     */
     private String prepareQuery(Map<String, String> mapToUpdate, UUID id, List<Object> map) {
         StringBuilder sql_middle = new StringBuilder("");
         StringBuilder finalSql_middle = sql_middle;
@@ -52,6 +79,11 @@ public class CampaignRepository implements ICampaignRepository {
         return sql;
     }
 
+    /**
+     *
+     * @param id the id
+     * @return
+     */
     @Override
     @Transactional(readOnly = true)
     public Campaign getCompany(UUID id) {
@@ -62,6 +94,10 @@ public class CampaignRepository implements ICampaignRepository {
         return campaign;
     }
 
+    /**
+     *
+     * @param campaign
+     */
     @Override
     @Transactional
     public void save(Campaign campaign) {
@@ -69,6 +105,10 @@ public class CampaignRepository implements ICampaignRepository {
                 campaign.getId(), campaign.getName(), campaign.getStatus());
     }
 
+    /**
+     *
+     * @param scenarioList the scenario list
+     */
     @Override
     @Transactional
     public void save(List<Scenario> scenarioList) {

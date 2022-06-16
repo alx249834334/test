@@ -13,12 +13,21 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+/**
+ * The type Campaign service test.
+ */
 @SpringBootTest
 class CampaignServiceTest {
 
+    /**
+     * The Campaign repository.
+     */
     @Autowired
     CampaignRepository campaignRepository;
 
+    /**
+     * Context loads.
+     */
     @Test
     public void contextLoads() {
         assertThat(campaignRepository).isNotNull();
