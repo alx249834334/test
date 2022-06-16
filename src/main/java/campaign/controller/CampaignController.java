@@ -53,7 +53,7 @@ public class CampaignController {
         log.error("Failed to parse json", exception);
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body("Failed to parse json");
+                .body("Failed to parse json error");
     }
 
     /**
