@@ -12,14 +12,15 @@ import java.util.UUID;
 @Mapper
 public interface CampaignMapper {
     @Mappings({
-            @Mapping(target="name", source="campaign.name"),
-            @Mapping(target="status", source="campaign.status")
+            @Mapping(target = "name", source = "campaign.name"),
+            @Mapping(target = "status", source = "campaign.status")
     })
     CampaignDto CampaignToDto(Campaign campaign);
+
     @Mappings({
             @Mapping(target = "id", expression = "java(getUUID())"),
-            @Mapping(target="name", source="campaignDto.name"),
-            @Mapping(target="status", source="campaignDto.status")
+            @Mapping(target = "name", source = "campaignDto.name"),
+            @Mapping(target = "status", source = "campaignDto.status")
     })
     Campaign CampaignDtoToCampaign(CampaignDto campaignDto);
 

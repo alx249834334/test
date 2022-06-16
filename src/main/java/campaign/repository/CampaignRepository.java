@@ -38,7 +38,7 @@ public class CampaignRepository implements ICampaignRepository {
             (rs, i) -> new Campaign(UUID.fromString(rs.getString(1)),
                     rs.getString(2),
                     rs.getString(3)
-                    );
+            );
 
     private final JdbcTemplate jdbcTemplate;
 
@@ -58,7 +58,6 @@ public class CampaignRepository implements ICampaignRepository {
     }
 
     /**
-     *
      * @param mapToUpdate
      * @param id
      * @param map
@@ -80,14 +79,13 @@ public class CampaignRepository implements ICampaignRepository {
     }
 
     /**
-     *
      * @param id the id
      * @return
      */
     @Override
     @Transactional(readOnly = true)
     public Campaign getCompany(UUID id) {
-        var campaign= jdbcTemplate.query(
+        var campaign = jdbcTemplate.query(
                 SQL_SELECT_CAMPAIGN,
                 rs -> rs.next() ? SELECT_MAPPER.mapRow(rs, 1) : null,
                 id);
@@ -95,7 +93,6 @@ public class CampaignRepository implements ICampaignRepository {
     }
 
     /**
-     *
      * @param campaign
      */
     @Override
@@ -106,14 +103,13 @@ public class CampaignRepository implements ICampaignRepository {
     }
 
     /**
-     *
      * @param scenarioList the scenario list
      */
     @Override
     @Transactional
     public void save(List<Scenario> scenarioList) {
-        scenarioList.forEach( el ->
-        jdbcTemplate.update(INSERT_INTO_SCENARIO ,
-                el.getId(),el.getName(),el.getStart_date(),el.getEnd_date(),el.getCampaign_id()));
+        scenarioList.forEach(el ->
+                jdbcTemplate.update(INSERT_INTO_SCENARIO,
+                        el.getId(), el.getName(), el.getStart_date(), el.getEnd_date(), el.getCampaign_id()));
     }
 }

@@ -124,7 +124,7 @@ public class CampaignController {
      */
     @PatchMapping(value = "/campaigns/{id}")
     public void patchCampaign(@PathVariable UUID id,
-                              @RequestBody @Valid CampaignPatchDto patchCampaign)  throws JsonProcessingException {
+                              @RequestBody @Valid CampaignPatchDto patchCampaign) throws JsonProcessingException {
         campaignService.updateCampaign(id, patchCampaign);
     }
 

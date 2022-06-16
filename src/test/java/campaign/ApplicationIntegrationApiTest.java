@@ -48,8 +48,7 @@ class ApplicationIntegrationApiTest {
      * Test get.
      */
     @Test
-    public void testGet()
-    {
+    public void testGet() {
         LOG.debug("testGet");
         var result = this.restTemplate
                 .getForObject("http://localhost:" + port + "/api/campaigns/ec3b15b5-d075-4430-b447-c3d2661c64a0", Campaign.class);

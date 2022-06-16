@@ -48,7 +48,6 @@ public class CampaignService implements ICampaignService {
     }
 
     /**
-     *
      * @param newCompany
      * @return
      */
@@ -60,7 +59,6 @@ public class CampaignService implements ICampaignService {
     }
 
     /**
-     *
      * @param id            the id
      * @param patchCampaign the patch campaign
      */
@@ -75,7 +73,6 @@ public class CampaignService implements ICampaignService {
     }
 
     /**
-     *
      * @param file the file
      * @return
      * @throws Exception
@@ -84,7 +81,7 @@ public class CampaignService implements ICampaignService {
     public Campaign uploadScenariosAndGetCampaign(MultipartFile file) throws Exception {
         var ListScenarioDtoToUpload = ConverterCsv.convertFileToTargetObject(file, ScenarioDto.class);
         var ListScenarioToUpload = ListScenarioDtoToUpload.stream().
-                map( el -> scenarionMapper.ScenarioDtoToScenario(el) ).collect(Collectors.toList());
+                map(el -> scenarionMapper.ScenarioDtoToScenario(el)).collect(Collectors.toList());
 
         companyRepository.save(ListScenarioToUpload);
 

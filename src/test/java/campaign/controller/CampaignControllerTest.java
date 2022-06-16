@@ -41,7 +41,7 @@ class CampaignControllerTest {
     @Test
     public void testGet() throws Exception {
         this.mockMvc.perform(get("/api/campaigns/ec3b15b5-d075-4430-b447-c3d2661c64a0")).andDo(print()).andExpect(status().isOk());
-                //.andExpect(content().string(containsString("Hello, World")));
+        //.andExpect(content().string(containsString("Hello, World")));
     }
 
     /**
